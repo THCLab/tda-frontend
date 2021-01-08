@@ -1,6 +1,6 @@
 <template>
   <q-layout view="hHh lpR fFf" class="bg-grey-1">
-    <q-header elevated class="bg-white text-grey-8 q-py-xs" height-hint="58">
+    <q-header elevated class="bg-white text-blue-2 q-py-xs" height-hint="58">
       <q-toolbar>
         <q-btn
           flat
@@ -22,10 +22,10 @@
         <q-space />
 
         <div class="q-gutter-sm row items-center no-wrap">
-          <q-btn round dense flat color="grey-8" icon="message" v-if="$q.screen.gt.sm">
+          <q-btn round dense flat color="blue" icon="message" v-if="$q.screen.gt.sm">
             <q-tooltip>Messages</q-tooltip>
           </q-btn>
-          <q-btn round dense flat color="grey-8" icon="notifications">
+          <q-btn round dense flat color="blue" icon="notifications">
             <q-badge color="red" text-color="white" floating>
               2
             </q-badge>
@@ -50,9 +50,9 @@
     >
       <q-scroll-area class="fit">
         <q-list padding>
-          <q-item v-for="link in links1" :key="link.text" v-ripple clickable>
+          <q-item v-for="link in links1" :key="link.text" :to="link.path" v-ripple clickable>
             <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
+              <q-icon color="blue" :name="link.icon" />
             </q-item-section>
             <q-item-section>
               <q-item-label>{{ link.text }}</q-item-label>
@@ -61,9 +61,9 @@
 
           <q-separator class="q-my-md" />
 
-          <q-item v-for="link in links2" :key="link.text" v-ripple clickable>
+          <q-item v-for="link in links2" :to="link.path" :key="link.text" v-ripple clickable>
             <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
+              <q-icon color="blue" :name="link.icon" />
             </q-item-section>
             <q-item-section>
               <q-item-label>{{ link.text }}</q-item-label>
@@ -72,9 +72,9 @@
 
           <q-separator class="q-my-md" />
 
-          <q-item v-for="link in links4" :key="link.text" v-ripple clickable>
+          <q-item v-for="link in links4" :to="link.path" :key="link.text" v-ripple clickable>
             <q-item-section avatar>
-              <q-icon color="grey" :name="link.icon" />
+              <q-icon color="blue" :name="link.icon" />
             </q-item-section>
             <q-item-section>
               <q-item-label>{{ link.text }}</q-item-label>
@@ -88,6 +88,7 @@
               <a
                 v-for="button in buttons1"
                 :key="button.text"
+                :to="button.path"
                 class="TDA__drawer-footer-link"
                 href="javascript:void(0)"
               >
@@ -127,27 +128,27 @@ export default {
       leftDrawerOpen: false,
       search: '',
       links1: [
-        { icon: 'home', text: 'Home' },
-        { icon: 'whatshot', text: 'Messages' },
-        { icon: 'subscriptions', text: 'My Documents' }
+        { icon: 'home', text: 'Home', path: '/' },
+        { icon: 'message', text: 'Messages', path: '/messages' },
+        { icon: 'subscriptions', text: 'My Documents', path: 'documents' }
       ],
       links2: [
-        { icon: 'store', text: 'Services' },
-        { icon: 'restore', text: 'Data Store' },
-        { icon: 'query_stats', text: 'Personal Analytics' },
-        { icon: 'health_and_safety', text: 'Consent management' }
+        { icon: 'store', text: 'Services', path: '/services' },
+        { icon: 'restore', text: 'Data Store', path: '/data_store' },
+        { icon: 'query_stats', text: 'Personal Analytics', path: '/analytics' },
+        { icon: 'health_and_safety', text: 'Consent management', path: '/consent' }
       ],
       links4: [
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'help', text: 'Help' }
+        { icon: 'settings', text: 'Settings', path: '/settings' },
+        { icon: 'help', text: 'Help', path: '/help' }
       ],
       buttons1: [
-        { text: 'About' }
+        { text: 'About', path: '/about' }
       ],
       buttons2: [
-        { text: 'Terms' },
-        { text: 'Privacy' },
-        { text: 'Policy & Safety' }
+        { text: 'Terms', path: '/about' },
+        { text: 'Privacy', path: '/about' },
+        { text: 'Policy & Safety', path: '/about' }
       ]
     }
   },
