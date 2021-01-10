@@ -6,13 +6,13 @@
 
     <div class="content">
       <current-pds ref="CurrentPdsComponent" />
-      <pds-plugins
-        @configure-plugin="previewPluginConfig($event)" />
+        <pds-plugins
+          @configure-plugin="previewPluginConfig($event)" />
     </div>
 
     <preview-component ref="PluginConfigPreviewComponent"
-      :readonly="false" confirmLabel="Connect"
-      :form="pluginForm" :alternatives="pluginAlternatives"></preview-component>
+                       :readonly="false" confirmLabel="Connect"
+                                         :form="pluginForm" :alternatives="pluginAlternatives"></preview-component>
   </div>
 </template>
 
@@ -22,8 +22,7 @@ import axios from 'axios'
 import CurrentPds from './PdsSettings/CurrentPds'
 import PdsPlugins from './PdsSettings/PdsPlugins'
 
-// import { eventBus as ocaEventBus, EventHandlerConstant,
-//  PreviewComponent } from 'odca-form'
+import { eventBus as ocaEventBus, EventHandlerConstant } from 'odca-form'
 
 export default {
   name: 'pds-settings',

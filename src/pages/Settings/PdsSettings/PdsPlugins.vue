@@ -9,9 +9,9 @@
           :name="plugin.pluginName + index"
           :key="index">
           <el-row>
-            <vue-json-pretty :deep=0 :data="plugin" />
+            <!-- <vue-json-pretty :deep=0 :data="plugin" /> -->
             <el-button size="medium" :disabled="!plugin.oca_schema_namespace || !plugin.oca_schema_dri"
-              @click="configure(plugin)">Configure</el-button>
+                       @click="configure(plugin)">Configure</el-button>
           </el-row>
         </el-collapse-item>
       </ul>
@@ -21,14 +21,14 @@
 
 <script>
 import axios from 'axios'
-// import { renderForm } from 'odca-form'
-import VueJsonPretty from 'vue-json-pretty'
+import { renderForm } from 'odca-form'
+// import VueJsonPretty from 'vue-json-pretty'
 
 export default {
   name: 'pds-plugins',
-  components: {
+  /* components: {
     VueJsonPretty
-  },
+  }, */
   data () {
     return {
       expanded_items: [],
@@ -84,7 +84,7 @@ export default {
             schema_base: schemaBase,
             overlays: branch.overlays.filter(o => {
               if (!o.language) { return true }
-              return o.language == lang
+              return o.language === lang
             })
           }
         })

@@ -1,5 +1,9 @@
 <template>
   <div class="q-pa-md">
+    <pds-settings title="Personal Data Storage" />
+    <controller-settings title="Controller Configuration" />
+    <tda-settings title="TDA Configuration" />
+
     <q-list bordered padding>
       <q-item-label header>User Controls</q-item-label>
 
@@ -122,7 +126,22 @@
 </template>
 
 <script>
-  import PdsSettings from './Settings/PdsSettings.vue'
-  import ControllerSettings from './Settings/ControllerSettings.vue'
-  import TdaSettings from './Settings/TdaSettings.vue'
+import PdsSettings from './Settings/PdsSettings.vue'
+import ControllerSettings from './Settings/ControllerSettings.vue'
+import TdaSettings from './Settings/TdaSettings.vue'
+
+export default {
+  name: 'settings',
+  components: {
+    PdsSettings,
+    ControllerSettings,
+    TdaSettings
+  },
+  data () {
+    return {
+    }
+  },
+  methods: {
+  }
+}
 </script>
