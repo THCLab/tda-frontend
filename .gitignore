@@ -1,6 +1,7 @@
 .DS_Store
 .thumbs.db
 node_modules
+Session.vim
 
 # Quasar core related directories
 .quasar
