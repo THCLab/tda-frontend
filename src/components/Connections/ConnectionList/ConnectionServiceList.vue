@@ -20,7 +20,7 @@
 import axios from 'axios';
 
 import { mapState, mapActions } from 'vuex'
-import { renderForm } from 'odca-form'
+import { renderForm } from 'oca.js-vue'
 
 export default {
   name: 'connection-service-list',
@@ -90,7 +90,7 @@ export default {
       axios.get(`${this.acapyApiUrl}/verifiable-services/request-service-list/${connId}`)
     },
     async renderServiceForm(service) {
-      const consentAnswers = JSON.parse(service.consent_schema.data)
+      const consentAnswers = service.consent_schema.oca_data
       const consentBranch = (await axios.get(
         `${this.ocaRepoUrl}/api/v2/schemas/${service.consent_schema.oca_schema_namespace}/${service.consent_schema.oca_schema_dri}`
       )).data
@@ -102,7 +102,7 @@ export default {
         consentLangBranches.forEach(langBranch => {
           consentFormAlternatives.push({
             language: langBranch.lang,
-            form: renderForm([langBranch.branch.schema_base, ...langBranch.branch.overlays]).form
+            form: renderForm([langBranch.branch.schema_base, ...langBranch.branch.overlays], service.consent_schema.oca_schema_dri).form
           })
         })
         consentForm = consentFormAlternatives[0].form
@@ -124,7 +124,7 @@ export default {
         serviceLangBranches.forEach(langBranch => {
           serviceFormAlternatives.push({
             language: langBranch.lang,
-            form: renderForm([langBranch.branch.schema_base, ...langBranch.branch.overlays]).form
+            form: renderForm([langBranch.branch.schema_base, ...langBranch.branch.overlays], service.service_schema.oca_schema_dri).form
           })
         })
         serviceForm = serviceFormAlternatives[0].form

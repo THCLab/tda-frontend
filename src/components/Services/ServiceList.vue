@@ -29,7 +29,7 @@
 import axios from 'axios';
 
 import VueJsonPretty from 'vue-json-pretty';
-import { renderForm } from 'odca-form'
+import { renderForm } from 'oca.js-vue'
 
 export default {
   name: 'service-list',
@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     async renderServiceForm(service) {
-      const consentAnswers = JSON.parse((await axios.get(`${this.acapyApiUrl}/pds/${service.consent_schema.data_dri}`)).data.payload)
+      const consentAnswers = service.consent_schema.oca_data
       const consentBranch = (await axios.get(
         `${this.ocaRepoUrl}/api/v2/schemas/${service.consent_schema.oca_schema_namespace}/${service.consent_schema.oca_schema_dri}`
       )).data

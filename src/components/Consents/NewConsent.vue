@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <preview-component confirmLabel="Create" :confirmProcessing="consentData.sending" ref="ConsentPreviewComponent" :form="consent.form" :alternatives="consent.form_alternatives"></preview-component>
+    <preview-component confirmLabel="Create" :readonly="false" :confirmProcessing="consentData.sending" ref="ConsentPreviewComponent" :form="consent.form" :alternatives="consent.form_alternatives"></preview-component>
   </div>
 </template>
 
@@ -25,7 +25,7 @@ import adminApi from '@/admin_api.ts'
 import OcaSchemaSearch from './NewConsent/OcaSchemaSearch'
 
 import { eventBus as ocaEventBus, EventHandlerConstant,
-  PreviewComponent } from 'odca-form'
+  PreviewComponent } from 'oca.js-vue'
 
 export default {
   name: 'new-consent',
@@ -72,7 +72,17 @@ export default {
     },
     openCreateConsentForm() {
       try {
-        this.$refs.ConsentPreviewComponent.openModal(this.consent.form);
+        const schemaDri = this.consent.oca_schema_dri
+        this.$_adminApi_getCurrentData({ schemaDris: [schemaDri] })
+          .then(r => {
+            let input = null
+            const schemaFillings = r.data.result[schemaDri]
+            if (schemaFillings.length > 0) {
+              input = JSON.parse(schemaFillings[0].content)
+            }
+
+            this.$refs.ConsentPreviewComponent.openModal(this.consent.form, input);
+          })
       } catch(e) {
         console.log(e)
         this.$noty.error("ERROR! Form data are corrupted.", {
@@ -87,7 +97,7 @@ export default {
         label: this.consent.label,
         oca_schema_namespace: this.consent.oca_schema_namespace,
         oca_schema_dri: this.consent.oca_schema_dri,
-        payload: data
+        data: Object.values(data)[0].p
       }).then(r => {
         this.consentData.sending = false
         if (r.data.success) {

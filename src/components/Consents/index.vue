@@ -20,7 +20,7 @@
 <script>
 import axios from 'axios';
 import adminApi from '@/admin_api.ts'
-import { PreviewComponent, MultiPreviewComponent } from 'odca-form'
+import { PreviewComponent, MultiPreviewComponent } from 'oca.js-vue'
 import NewConsent from './NewConsent'
 import ConsentList from './ConsentList'
 import share from '@/share.ts';
@@ -88,8 +88,8 @@ export default {
               label: '',
               ocaSchemaNamespace: cred.oca_schema_namespace,
               ocaSchemaDri: cred.oca_schema_dri,
-              dataDri: cred.data_dri,
-              serviceConsentMatchId: cred.oca_schema_namespace
+              dataDri: cred.oca_data_dri,
+              serviceConsentMatchId: cred.service_consent_match_id
             }
           })
         }

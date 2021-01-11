@@ -129,7 +129,7 @@ import axios from 'axios';
 import VueJsonPretty from 'vue-json-pretty';
 import adminApi from '@/admin_api.ts'
 import { mapState, mapActions } from 'vuex'
-import { renderForm, PreviewComponent } from 'odca-form'
+import { renderForm, PreviewComponent } from 'oca.js-vue'
 
 export default {
   name: 'presentation',
@@ -289,12 +289,12 @@ export default {
             this.credentialsLabel[presExId] = this.credentialsSchema[presExId].label
           })
 
-        if(credential.credentialSubject.data_dri) {
-          this.schemaInput[presExId] = credential.credentialSubject.data_dri
-          if (!this.schemaPayload[credential.credentialSubject.data_dri]) {
+        if(credential.credentialSubject.oca_data_dri) {
+          this.schemaInput[presExId] = credential.credentialSubject.oca_data_dri
+          if (!this.schemaPayload[credential.credentialSubject.oca_data_dri]) {
             this.$_adminApi_askForPayload({
               connection_id: presentationEl.connection_id,
-              payload_id: credential.credentialSubject.data_dri
+              payload_id: credential.credentialSubject.oca_data_dri
             })
           }
         }
@@ -396,7 +396,8 @@ export default {
           "state" in exchange &&
           (
             exchange.state === "verified" ||
-            exchange.state === "presentation_acked"
+            exchange.state === "presentation_acked" ||
+            exchange.state === "presentation_received"
           )
         ) &&
         //==========================================

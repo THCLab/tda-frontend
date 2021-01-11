@@ -128,7 +128,7 @@ import share from '@/share.ts';
 import axios from 'axios';
 const hl = require('hashlink');
 
-import { resolveZipFile, renderForm, PreviewComponent } from 'odca-form'
+import { resolveZipFile, renderForm, PreviewComponent } from 'oca.js-vue'
 
 export default {
   name: 'my-credentials-list',
@@ -295,17 +295,9 @@ export default {
             this.credentialsLabel[credential.issuanceDate] = this.credentialsSchema[credential.issuanceDate].label
           })
 
-        if(credential.credentialSubject.data_dri) {
-          this.schemaInput[credential.issuanceDate] = JSON.parse(
-            (await axios.get(`${this.acapyApiUrl}/pds/${credential.credentialSubject.data_dri}`)).data.payload
-          )
-        } else if (credential.credentialSubject.data_dri) {
-          axios.post(`${this.acapyApiUrl}/verifiable-services/get-issue-self`, {
-            issue_id: credential.credentialSubject.data_dri
-          })
-            .then(response => {
-                this.schemaInput[credential.issuanceDate] = JSON.parse(response.data[0].payload)
-            })
+        if(credential.credentialSubject.oca_data_dri) {
+          const schemaPayload = (await axios.get(`${this.acapyApiUrl}/pds/${credential.credentialSubject.oca_data_dri}`)).data.payload
+          this.schemaInput[credential.issuanceDate] = Object.values(schemaPayload)[0].p
         }
       }
     },
@@ -367,6 +359,13 @@ export default {
           item.connection = null;
         }
         return item;
+      }).sort((a, b) => {
+        if (a.credential.issuanceDate < b.credential.issuanceDate) {
+          return 1
+        } else if (a.credential.issuanceDate > b.credential.issuanceDate) {
+          return -1
+        }
+        return 0
       });
     },
     ocaRepoUrl: function() {

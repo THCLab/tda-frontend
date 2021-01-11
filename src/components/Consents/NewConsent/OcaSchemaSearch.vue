@@ -32,7 +32,7 @@
 import axios from 'axios'
 
 import VueTypeaheadBootstrap from 'vue-typeahead-bootstrap'
-import { renderForm, PreviewComponent } from 'odca-form'
+import { renderForm, PreviewComponent } from 'oca.js-vue'
 
 export default {
   name: 'oca-schema-search',
@@ -109,7 +109,7 @@ export default {
         langBranches.forEach(langBranch => {
           this.ocaFormAlternatives.push({
             language: langBranch.lang,
-            form: renderForm([langBranch.branch.schema_base, ...langBranch.branch.overlays]).form
+            form: renderForm([langBranch.branch.schema_base, ...langBranch.branch.overlays], branchBase.DRI).form
           })
         })
 
