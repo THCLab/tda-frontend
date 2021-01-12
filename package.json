@@ -15,7 +15,8 @@
     "core-js": "^3.6.5",
     "odca-form": "^0.0.36",
     "quasar": "^1.0.0",
-    "vue-i18n": "^8.0.0"
+    "vue-i18n": "^8.0.0",
+    "vue-qrcode-reader": "^2.3.16"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",
