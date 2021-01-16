@@ -46,6 +46,72 @@
       </q-card-actions>
     </q-card>
 
+    <FlipCard>
+      <template slot="front">
+          <q-card-section horizontal>
+            <q-card-section class="q-pt-xs col-8">
+              <div class="text-overline">Document</div>
+              <div class="text-h5 q-mt-sm q-mb-xs">Driving license</div>
+              <div class="text-caption text-grey">
+                <q-list bordered separator>
+                   <q-item v-ripple>
+                     <q-item-section>
+                       <q-item-label>Name</q-item-label>
+                       <q-item-label caption>Bob Konieczny</q-item-label>
+                     </q-item-section>
+                   </q-item>
+
+                   <q-item clickable v-ripple>
+                     <q-item-section>
+                       <q-item-label>Vehical type</q-item-label>
+                       <q-item-label caption>A B C D+E</q-item-label>
+                     </q-item-section>
+                   </q-item>
+                </q-list>
+              </div>
+            </q-card-section>
+
+            <q-card-section class="col-4 flex">
+              <q-img
+                class="rounded-borders"
+                src="https://cdn.quasar.dev/img/boy-avatar.png"
+              />
+            </q-card-section>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-actions>
+            <q-btn flat round icon="access_time" />
+            <q-btn flat>
+              Valid until 2025-10-13
+            </q-btn>
+            <q-btn flat color="primary">
+              Issued by Austrian Gov on 2020-10-12
+            </q-btn>
+          </q-card-actions>
+      </template>
+      <template slot="back">
+          <q-card-section horizontal>
+            <q-card-section>
+              <div class="text-overline">Driving license</div>
+              <div class="text">Scan to verify</div>
+            </q-card-section>
+          </q-card-section>
+
+          <q-separator />
+
+          <q-card-section horizontal>
+              <q-icon name="qr_code" class="col" style="font-size: 10em"/>
+          </q-card-section>
+          <q-card-actions>
+            <q-btn flat color="primary">
+              Share
+            </q-btn>
+          </q-card-actions>
+      </template>
+    </FlipCard>
+
     <q-card class="my-card" flat bordered>
       <q-item>
         <q-item-section avatar>
@@ -106,3 +172,13 @@
     </q-card>
   </div>
 </template>
+
+<script>
+import FlipCard from '../components/FlipCard'
+
+export default {
+  components: {
+    FlipCard
+  }
+}
+</script>
