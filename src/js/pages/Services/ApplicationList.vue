@@ -16,7 +16,7 @@
             :icon="applicationIcon"
             text-color="white"
           >
-            <q-tooltip v-if="type == 'pending'">{{getPolicyValidation(application).text}}</q-tooltip>
+            <!-- <q-tooltip v-if="type == 'pending'">{{getPolicyValidation(application).text}}</q-tooltip> -->
           </q-avatar>
         </q-item-section>
         <q-item-section>
@@ -59,7 +59,7 @@ export default {
     },
     applicationIcon: function() {
       if (this.type === 'pending')
-        return 'shield';
+        return 'assignment';
 
       return 'done';
     }
@@ -171,7 +171,11 @@ export default {
 
       return 'teal';
     },
-    getPolicyValidation(application) {
+    getPolicyValidation(_application) {
+      return {
+        color: 'teal'
+      }
+      /*
       const policy_matches = application.usage_policies_match
 
       if (policy_matches === true)
@@ -191,6 +195,7 @@ export default {
           color: 'grey',
           text: 'Usage policies could not be matched yet.',
         };
+      */
     },
     async preview(application) {
       this.$emit('application-preview',
