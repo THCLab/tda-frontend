@@ -344,14 +344,17 @@ export default {
       this.$refs.PreviewPresentationComponent.openModal()
     },
     async confirmHandler(e) {
-      const signerIndex = Object.values(e[1])[0].p.signer
+      const verificationPayload = Object.values(e[1])[0].p
+      const signerIndex = verificationPayload.signer
       const schema = this.credentialsSchema['verification-meta']
       const signerName = schema.translations[0].data.controls[0].dataOptions
         .find(o => o.id == signerIndex).text
+      const personId = verificationPayload.person_id
       const params = {
         exchange_record_id: this.previewedPresExId,
         status: true,
-        issuer_name: signerName
+        issuer_name: signerName,
+        person_id: personId
       };
 
       try {
@@ -365,14 +368,17 @@ export default {
       }
     },
     async rejectHandler(e) {
-      const signerIndex = Object.values(e[1])[0].p.signer
+      const verificationPayload = Object.values(e[1])[0].p
+      const signerIndex = verificationPayload.signer
       const schema = this.credentialsSchema['verification-meta']
       const signerName = schema.translations[0].data.controls[0].dataOptions
         .find(o => o.id == signerIndex).text
+      const personId = verificationPayload.person_id
       const params = {
         exchange_record_id: this.previewedPresExId,
         status: false,
-        issuer_name: signerName
+        issuer_name: signerName,
+        person_id: personId
       };
 
       try {
@@ -391,7 +397,7 @@ export default {
     /***************************************************/
     async generateVerificaitonMetaPreview () {
       const key = 'verification-meta'
-      const schemaDRI = 'gEQ1qg8Xc7oq3xVZHuss2iayJRWoyoNH4y8ZXp7nQbEF'
+      const schemaDRI = 'csP4oZ14JEs8ZKc2wRAELjgiLSz4QcU2h3RAMqAuCX6L'
 
       const r = await axios.get(`${this.ocaRepoUrl}/api/v3/schemas/${schemaDRI}`)
       const branch = r.data
