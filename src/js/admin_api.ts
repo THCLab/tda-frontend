@@ -58,6 +58,11 @@ export default {
           const apiUrl = this.adminApiUrl
           return sendPresentation(apiUrl, params)
         },
+        $_adminApi_rejectPresentation(params: rejectPresentationParams): Promise<object> {
+          // @ts-ignore
+          const apiUrl = this.adminApiUrl
+          return rejectPresentation(apiUrl, params)
+        },
         $_adminApi_acknowledgePresentation(params: acknowledgePresentationParams): Promise<object> {
           // @ts-ignore
           const apiUrl = this.adminApiUrl
@@ -191,6 +196,14 @@ type sendPresentationParams = {
 
 function sendPresentation(apiUrl: string, params: sendPresentationParams) {
     return axios.post(`${apiUrl}/present-proof/present`, params)
+}
+
+type rejectPresentationParams = {
+    exchange_record_id: string
+}
+
+function rejectPresentation(apiUrl: string, params: rejectPresentationParams) {
+    return axios.post(`${apiUrl}/present-proof/reject`, params)
 }
 
 export type acknowledgePresentationParams = {

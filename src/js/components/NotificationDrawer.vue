@@ -527,12 +527,11 @@ export default {
     },
     async rejectCredential(request) {
       const obj = {
-        exchange_record_id: request.presentation_exchange_id,
-        status: false,
+        exchange_record_id: request.presentation_exchange_id
       };
 
       try {
-        await this.$_adminApi_acknowledgePresentation(obj);
+        await this.$_adminApi_rejectPresentation(obj);
 
         this.$notify.success("Request rejected.")
       }
