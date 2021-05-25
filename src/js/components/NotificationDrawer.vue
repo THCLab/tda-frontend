@@ -261,7 +261,7 @@ export default {
 
       this.isRefreshing = false;
 
-      this.$emit('refreshRequests', this.receivedRequests);
+      this.$emit('refreshRequests', [...this.receivedRequests, ...this.receivedPresentations]);
     },
     getTitle(request) {
       const conn = this.activeConnections.find(c => c.connection_id == request.connection_id);
