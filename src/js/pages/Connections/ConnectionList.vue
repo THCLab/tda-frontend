@@ -38,8 +38,8 @@
                 <q-item
                   clickable
                   v-close-popup
+                  @click="delete_conn(connection)"
                 >
-                  <!-- @click="delete_conn(connection)" -->
                   <q-item-section side>
                     <q-icon name="delete" />
                   </q-item-section>
@@ -104,10 +104,10 @@ export default {
       this.editFormActive = false;
       this.$emit('connection-editted', this.editForm);
     },
+    */
     delete_conn: function (connection) {
       this.$emit('connection-deleted', connection);
     },
-    */
     openPresentationRequest(connection_id) {
       this.currentPresentationRequest.connection_id = connection_id
       this.$refs.PresentationDialog.isDialogVisible = true
