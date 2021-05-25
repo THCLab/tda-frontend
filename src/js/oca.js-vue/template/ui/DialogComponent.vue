@@ -4,8 +4,10 @@
         <q-card :class="{ large: size == 'lg', xlarge: size == 'xl' }">
           <q-toolbar>
             <q-toolbar-title>
-              <span class="text-weight-bold">{{ headerLabel }}</span>
-              <slot name="header" />
+              <div class="row">
+                <span class="text-weight-bold">{{ headerLabel }}</span>
+                <slot name="header" />
+              </div>
             </q-toolbar-title>
 
             <q-btn flat round dense icon="close" v-close-popup />
