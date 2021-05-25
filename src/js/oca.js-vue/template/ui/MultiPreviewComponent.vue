@@ -10,11 +10,16 @@
               <div class='row' v-for="(form, j) in formRows">
                 <div class="form-preview__header row" style="width: 100%">
                   <div class="col-md-7 offset-md-1">{{ form.label }}</div>
-                  <select
-                    class="form-control col-md-3"
-                    v-model="selectedLang[i][j]">
-                    <option v-for="alt in form.alternatives">{{alt.language}}</option>
-                  </select>
+                  <div class="col-md-4">
+                    <q-select
+                      outlined
+                      dense
+                      options-dense
+                      label="Language"
+                      v-model="selectedLang[i][j]"
+                      :options="form.alternatives.map(a => a.language)">
+                    </q-select>
+                  </div>
                 </div>
                 <form-builder-gui :ref="`FormBuilderGui-${i}-${j}`"
                   :selected-lang="selectedLang[i][j]"

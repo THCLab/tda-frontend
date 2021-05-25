@@ -7,12 +7,18 @@
                     :confirmProcessing="confirmProcessing"
                     :rejectProcessing="rejectProcessing">
     <template v-slot:header>
-      <select
-        style="margin-left: 10px;"
-        class="form-control col-md-3"
-        v-model="selectedLang">
-        <option v-for="alt in alternatives">{{alt.language}}</option>
-      </select>
+      <div class="col-md-3">
+        <q-select
+          outlined
+          dense
+          options-dense
+          label="Language"
+          style="margin-left: 10px;"
+          class="form-control"
+          v-model="selectedLang"
+          :options="alternatives.map(alt => alt.language)">
+        </q-select>
+      </div>
     </template>
 
     <template v-slot:body>
