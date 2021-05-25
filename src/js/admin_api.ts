@@ -210,7 +210,7 @@ export type acknowledgePresentationParams = {
   exchange_record_id: string;
   status: boolean;
   issuer_name?: string;
-  person_id?: string;
+  person_id: string;
 }
 
 function acknowledgePresentation(apiUrl: string, params: acknowledgePresentationParams) {
@@ -220,9 +220,7 @@ function acknowledgePresentation(apiUrl: string, params: acknowledgePresentation
   if (params.issuer_name) {
     url.searchParams.append('issuer_name', params.issuer_name);
   }
-  if (params.person_id) {
-    url.searchParams.append('person_id', params.person_id);
-  }
+  url.searchParams.append('person_id', params.person_id);
 
   return axios.post(url.toString());
 }

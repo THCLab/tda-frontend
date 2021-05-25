@@ -349,7 +349,7 @@ export default {
       const schema = this.credentialsSchema['verification-meta']
       const signerName = schema.translations[0].data.controls[0].dataOptions
         .find(o => o.id == signerIndex).text
-      const personId = verificationPayload.person_id
+      const personId = verificationPayload.person_id || ''
       const params = {
         exchange_record_id: this.previewedPresExId,
         status: true,
@@ -373,7 +373,7 @@ export default {
       const schema = this.credentialsSchema['verification-meta']
       const signerName = schema.translations[0].data.controls[0].dataOptions
         .find(o => o.id == signerIndex).text
-      const personId = verificationPayload.person_id
+      const personId = verificationPayload.person_id || ''
       const params = {
         exchange_record_id: this.previewedPresExId,
         status: false,
