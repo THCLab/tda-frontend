@@ -14,7 +14,7 @@
             <slot name="body" />
           </q-card-section>
 
-          <q-card-actions align="right">
+          <q-card-actions class="dialog__footer" align="right">
             <q-btn flat label="Close" color="primary" v-close-popup />
             <q-btn flat :label="confirmLabel" color="primary" v-if="!readonly || reviewable" @click="confirmForm" :disabled="processing" v-show="confirmLabel" v-close-popup />
             <q-btn flat :label="rejectLabel" color="primary" v-if="!readonly || reviewable" @click="rejectForm" :disabled="processing" v-show="rejectLabel" v-close-popup />
@@ -69,6 +69,12 @@ export default {
 .xlarge {
   width: 900px;
   max-width: 80vw;
+}
+
+.dialog {
+  &__footer {
+    margin-bottom: 40px;
+  }
 }
 
 </style>
