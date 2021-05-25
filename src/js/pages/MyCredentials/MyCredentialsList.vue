@@ -197,7 +197,7 @@ export default {
       // this.$refs.PreviewComponent.openModal({ label: 'Loading...', sections: [] });
       try {
           this.form = schema
-          this.$refs.PreviewComponent.openModal(this.form, input);
+          this.$refs.PreviewComponent.openModal(this.form, input, alternatives);
       } catch (e) {
           this.$refs.PreviewComponent.closeModal()
           this.$notify.error('Form data are corrupted.')

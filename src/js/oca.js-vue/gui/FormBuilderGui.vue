@@ -33,7 +33,8 @@
           selectedLang: {
             handler: function() {
               this.changeOcaForm()
-            }
+            },
+            immediate: true
           }
         },
         methods: {
@@ -50,8 +51,9 @@
                 FormHandler.setValue(this.formCopy, values);
             },
             changeOcaForm() {
+                if (!this.selectedLang) { return }
+                if (!this.alternatives) { return }
                 const inputData = Object.assign({}, ...Object.values(this.getValue()))
-              console.log(inputData)
                 this.formCopy = this.alternatives
                   .find(alt => alt.language == this.selectedLang).form
                 this.fillForm(inputData)

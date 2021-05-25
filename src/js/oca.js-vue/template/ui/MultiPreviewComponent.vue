@@ -65,7 +65,12 @@
                       this.fillForm(form.formData, form.input)
                     }
                     if(form.alternatives.length) {
-                      this.selectedLang[i][j] = form.alternatives[0].language
+                      const enAlt = form.alternatives.find(alt => alt.language.startsWith('en'))
+                      if (enAlt) {
+                        this.selectedLang[i][j] = enAlt.language
+                      } else {
+                        this.selectedLang[i][j] = form.alternatives[0].language
+                      }
                     }
                     if(form.readonly) {
                         form.formData.sections.forEach(section => {

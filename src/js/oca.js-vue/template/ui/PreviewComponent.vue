@@ -50,11 +50,15 @@ export default {
     label: ''
   }),
   methods: {
-    openModal(formData, formInput = null) {
-      if(this.$parent.language) {
-        this.selectedLang = this.$parent.language
-      } else if(this.alternatives && this.alternatives.length) {
-        this.selectedLang = this.alternatives[0].language
+    openModal(formData, formInput = null, formAlternatives = null) {
+      let alts = formAlternatives || this.alternatives
+      if(alts && alts.length) {
+        const enAlt = alts.find(alt => alt.language.startsWith('en'))
+        if (enAlt) {
+          this.selectedLang = enAlt.language
+        } else {
+          this.selectedLang = alts[0].language
+        }
       }
       this.formInput = formInput
       // set data
