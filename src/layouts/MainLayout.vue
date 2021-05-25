@@ -50,7 +50,6 @@
             icon="message"
             v-if="$q.screen.gt.sm"
           >
-            <q-tooltip>Messages</q-tooltip>
           </q-btn>
 
           <q-btn
@@ -69,7 +68,6 @@
             >
               {{ pendingRequests.length }}
             </q-badge>
-            <q-tooltip>Notifications</q-tooltip>
           </q-btn>
           <q-btn
             round
@@ -78,7 +76,6 @@
             <q-avatar size="26px">
               <img src="https://cdn.quasar.dev/img/boy-avatar.png">
             </q-avatar>
-            <q-tooltip>Account</q-tooltip>
           </q-btn>
         </div>
       </q-toolbar>
