@@ -343,7 +343,6 @@ export default {
       connection.sendMessage(query_msg);
     },
     onQrScan: function (decodedString) {
-      /*
       try {
         // only if string can be parsed as url, we will accept it
         new URL(decodedString);
@@ -353,8 +352,7 @@ export default {
 
       this.isQrDialogVisible = false;
       this.invitation = decodedString;
-      this.recieve_invitation();
-      */
+      this.recieveInvitation()
     },
   },
 }
