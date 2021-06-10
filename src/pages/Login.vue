@@ -64,8 +64,12 @@ export default class Login extends Vue {
 
   async created () {
     if (this.isLoggedIn) {
-      this.isLoading = true
-      this.routeToMainScreen()
+      if (this.routeParams.get('agent_api') || this.invitationUrl) {
+        this.logout()
+      } else {
+        this.isLoading = true
+        this.routeToMainScreen()
+      }
     }
 
     if (this.routeParams.get('agent_api')) {
@@ -175,6 +179,12 @@ export default class Login extends Vue {
       await axios.get(`${acapyApiUrl}/info`)
     ).data as Dictionary).websocket_server_url as string
     Storage.set(Storage.Record.WebsocketUrl, agentWsUrl)
+  }
+
+  logout () {
+    Storage.remove(Storage.Record.AgentConnection)
+    Storage.remove(Storage.Record.AdminApiUrl)
+    Storage.remove(Storage.Record.WebsocketUrl)
   }
 
   async generateInvitationUrl () {
