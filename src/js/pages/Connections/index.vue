@@ -89,7 +89,7 @@
             </template>
           </q-banner>
 
-          <q-list v-if="activeConnections.length === 0">
+          <q-list v-if="[...activeConnections, ...pendingConnections].length === 0">
             <q-item>
               Add your first contact by scanning a QR-Code or adding it manually.
             </q-item>
@@ -222,7 +222,7 @@ export default {
   created: async function() {
     this.fetchConnections()
 
-    if (this.invitationConnections.length === 0) {
+    if (!this.invitationUrl) {
       this.fetchNewInvite()
     }
   },
@@ -239,6 +239,12 @@ export default {
       handler: function () {
         const prefix = `did:sov:BzCbsNYhMrjHiqZDTUASHg;spec`
         this.messages.forEach(msg => {
+          if (msg['@type'] === `${prefix}/connections/1.0/response`) {
+            this.fetchNewInvite()
+            this.fetchConnections()
+            this.removeMessage(msg['@id'])
+          }
+
           if (msg['@type'] === `${prefix}/admin-connections/0.1/connection` ||
             msg['@type'] === `${prefix}/admin-connections/0.1/ack`) {
             this.fetchConnections()
