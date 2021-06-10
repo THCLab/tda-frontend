@@ -8,6 +8,16 @@ const getters: GetterTree<AgentCommunicationStateInterface, StateInterface> = {
       conn.state === 'active' && conn.their_role !== 'admin'
     ))
   },
+  pendingConnections ({ connections }) {
+    return connections.filter(conn => (
+      conn.state === 'request' && conn.their_role !== 'admin'
+    ))
+  },
+  invitationConnections ({ connections }) {
+    return connections.filter(conn => (
+      conn.state === 'invitation' && conn.their_role !== 'admin'
+    ))
+  },
   dids ({ dids }) {
     return dids
   }

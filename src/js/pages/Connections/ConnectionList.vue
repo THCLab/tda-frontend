@@ -70,7 +70,7 @@ import PresentationRequestDialog from './ConnectionList/PresentationRequest/Dial
 
 export default {
   name: 'connection-list',
-  props: ['title', 'list','editable'],
+  props: ['title', 'activeConnections', 'pendingConnections', 'editable'],
   components: {
     PresentationRequestButton,
     PresentationRequestDialog,
@@ -85,6 +85,9 @@ export default {
     acapyApiUrl: function() {
       return Storage.get(Storage.Record.AdminApiUrl)
     },
+    list: function() {
+      return [...this.activeConnections, ...this.pendingConnections]
+    }
   },
   methods: {
     get_name: function(connection) {
@@ -121,26 +124,20 @@ export default {
       })
     },
     getConnectionColor(connection) {
-      return 'teal';
-      /*
-      if (isConnectionActive(connection))
+      if (this.activeConnections.includes(connection))
         return 'teal';
-      else if (isConnectionPending(connection))
+      else if (this.pendingConnections.includes(connection))
         return 'orange';
       else
         return 'red';
-        */
     },
     getConnectionIcon(connection) {
-      return 'done';
-      /*
-      if (isConnectionActive(connection))
+      if (this.activeConnections.includes(connection))
         return 'done';
-      else if (isConnectionPending(connection))
+      else if (this.pendingConnections.includes(connection))
         return 'sync';
       else
         return 'error_outline';
-        */
     },
   }
 }

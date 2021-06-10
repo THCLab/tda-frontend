@@ -99,7 +99,8 @@
               title="Active Connections:"
               editable="true"
               class="activeConnections"
-              :list="activeConnections"
+              :activeConnections="activeConnections"
+              :pendingConnections="pendingConnections"
               @refresh="fetchConnections"
               @connection-deleted="delete_connection"
             ></connection-list>
@@ -211,7 +212,6 @@ export default {
   },
   data: function() {
     return {
-      invite: null,
       isRefreshing: false,
       invitation: '',
       isQrDialogVisible: false,
@@ -222,13 +222,13 @@ export default {
   created: async function() {
     this.fetchConnections()
 
-    if (!this.invite) {
+    if (this.invitationConnections.length === 0) {
       this.fetchNewInvite()
     }
   },
   computed: {
     ...mapState('agentCommunication', ['invitationUrl', 'messages']),
-    ...mapGetters('agentCommunication', ['activeConnections']),
+    ...mapGetters('agentCommunication', ['activeConnections', 'pendingConnections', 'invitationConnections']),
     ...mapGetters('wsMessages', ['connectionMessages']),
     canShare() {
       return !!navigator.canShare
@@ -286,6 +286,7 @@ export default {
       };
       connection.sendMessage(msg);
       this.invitation = "";
+      setTimeout(() => { this.fetchConnections() }, 500)
     },
     async copyToClipboard(text) {
       try {
