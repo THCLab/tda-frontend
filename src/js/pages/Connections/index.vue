@@ -272,7 +272,7 @@ export default {
         '@type': 'did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/connection-get-list'
       })
     },
-    async fetchNewInvite() {
+    fetchNewInvite() {
       const msg = {
         "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/admin-connections/0.1/create-invitation",
         "label": connection.label,
