@@ -20,7 +20,7 @@
     "element-ui": "^2.10.1",
     "encryption-envelope-js": "1.1.4",
     "hashlink": "github:digitalbazaar/hashlink#decode",
-    "marked": "^0.8.0",
+    "marked": "^4.0.10",
     "oca.js-vue": "0.1.0",
     "request-promise": "^4.2.4",
     "tslib": "^1.10.0",
